@@ -1,0 +1,59 @@
+@import "../../styles/mixins.scss";
+
+.container{
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 900px;
+
+  h2{
+    border: 1px solid black;
+    @include flex-center;
+  }
+}
+.inputCalendar{
+  //border: 3px solid pink;
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+.inputBox {
+  border: 1px solid blue;
+  width: 400px;
+  height: 38px;
+  @include flex-column;
+}
+.input{
+  background-color: aliceblue;
+  outline: none;
+  border: none;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
+  width: 250px;
+  height: 25px;
+  margin: 5px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.btn{
+  background-color: pink;
+  color: white;
+  width: 60px;
+  height: 28px;
+  border: none;
+  border-radius: 10px;
+}
+
+.calendarContainer{
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+
+  div{
+    margin: 5px auto;
+  }
+}
+
+.todoList{
+  //border: 1px solid red;
+}
