@@ -40,7 +40,7 @@ const TodoMain2 = () => {
             setEditInputIndex(null)
             setEditInputValue('')
     }
-
+    
     const handleDelClick = (index) => {
         const newItems = addItem.filter((item, i) => i !== index)
          setAddItem(newItems)
