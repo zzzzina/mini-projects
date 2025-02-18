@@ -7,6 +7,7 @@ const TodoMain2 = () => {
     const [showInput, setShowInput] = useState(false)
     const [editInputIndex, setEditInputIndex] = useState(null)
     const [editInputValue, setEditInputValue] = useState('') // 수정입력창 입력값
+    const [checkedItem, setCheckedItem] = useState([])
 
     // 초기값에서 어쩌구 값으로 변경
     const handleChangeValue = (e) => {
@@ -40,7 +41,7 @@ const TodoMain2 = () => {
             setEditInputIndex(null)
             setEditInputValue('')
     }
-    
+
     const handleDelClick = (index) => {
         const newItems = addItem.filter((item, i) => i !== index)
          setAddItem(newItems)
@@ -49,6 +50,12 @@ const TodoMain2 = () => {
     const toggleInput = () => {
         setShowInput(!showInput);
     };
+
+    const checkBoxChange = (index) => {
+        const newCheckedItem = [...checkedItem]
+        newCheckedItem[index] = !newCheckedItem[index]
+        setCheckedItem(newCheckedItem)
+    }
 
     return (
         <div className={styles.container}>
@@ -81,8 +88,16 @@ const TodoMain2 = () => {
                              </div>
                              ) : (
                              <div className={styles.editStyle}>
-                                 <span>{item}</span>
-                                 <button onClick={() => handleEditClick(item, index)}>수정하기</button>
+                                 <input type="checkbox"
+                                        style={{width: '15px'}}
+                                        checked={checkedItem[index]}
+                                        onChange={() => checkBoxChange(index)} />
+                                 <span
+                                     className={styles.spanStyle}
+                                     style={{textDecoration : checkedItem[index] ? 'line-through' : 'none'}}>{item}</span>
+                                 {!checkedItem[index] && (
+                                     <button onClick={() => handleEditClick(item, index)}>수정하기</button>
+                                 )}
                                  <button onClick={() => handleDelClick(index)}>삭제</button>
                              </div>
                              )
