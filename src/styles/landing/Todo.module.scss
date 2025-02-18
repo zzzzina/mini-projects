@@ -16,7 +16,7 @@
     background-color: blanchedalmond;
     color: gray;
     border-radius: 13px;
-    margin: 6px;
+    margin: 5px;
     width: 70px;
     height: 28px;
   }
@@ -29,14 +29,13 @@
 .mapItem{
   position: absolute;
   margin: 0 auto;
-  width: 50%;
-  //height: auto;
+  width: 55%;
   right: 0;
 }
 .itemStyle{
   background-color: lightsteelblue;
   width: 100%;
-  height: 50px;
+  height: 49px;
   @include flex-center;
 
   span{
@@ -78,26 +77,30 @@
   }
 }
 .editStyle {
-  width: 435px;
+  width: 95%;
   background-color: aliceblue;
   height: 39px;
   border-radius: 15px;
   display: flex;
-  margin-left: 5px;
 
   input{
     height: 25px;
-    width: 250px;
-    margin: 5px;
+    width: 180px;
+    margin: 7px 5px 0 7px;
     outline: none;
   }
 }
+.checkBox{
+   width: 15px;
+   margin-left: 10px;
+ }
 .spanStyle{
   height: 25px;
-  width: 250px;
-  margin: 7px;
+  width: 170px;
+  margin-top: 7px;
 }
-.checkBox{
-  width: 15px;
-  margin-left: 10px;
+.spanStyle2{
+  height: 25px;
+  width: 140px;
+  margin-top: 7px;
 }

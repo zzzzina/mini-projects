@@ -1,22 +1,37 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styles from "../../styles/landing/Todo.module.scss";
 
-const TodoMain2 = () => {
+const TodoMain4 = () => {
     const [inputValue, setInputValue] = useState('')
     const [addItem, setAddItem] = useState([])
     const [showInput, setShowInput] = useState(false)
     const [editInputIndex, setEditInputIndex] = useState(null)
     const [editInputValue, setEditInputValue] = useState('') // 수정입력창 입력값
 
-    // 초기값에서 어쩌구 값으로 변경
+    const currentTime = () => {
+        const date = new Date()
+        const years = date.getFullYear()
+        const months = String(date.getMonth()+1).padStart(2,0)
+        const days = String(date.getDate()).padStart(2, 0)
+        const hours = String(date.getHours()).padStart(2, 0)
+        const minutes = String(date.getMinutes()).padStart(2, 0)
+
+        return (`${years}-${months}-${days} ${hours}:${minutes}`)
+    }
+
+    // 초기값에서 어쩌구값으로 변경
     const handleChangeValue = (e) => {
         setInputValue(e.target.value)
+
     }
     // 입력된 값을 추가
     const handleAddClick = (e) => {
-        if(inputValue !== ''){
-            console.log(inputValue)
-            const newItem = {content: inputValue, checked: false}
+        if(editInputIndex !== null){
+            alert('수정을 완료하세요.')
+            setInputValue('')
+
+        } else if(inputValue !== ''){
+            const newItem = {content: inputValue, checked: false, time: currentTime()}
             setAddItem([...addItem,newItem])
             setInputValue('')
         }
@@ -35,7 +50,8 @@ const TodoMain2 = () => {
     //저장버튼눌렀다
     const handleSaveClick = () => {
         const updateItems = [...addItem]
-        updateItems[editInputIndex].content = editInputValue
+        updateItems[editInputIndex].content = editInputValue // 수정한 입력값
+        updateItems[editInputIndex].time = currentTime() // 수정한 시간
         setAddItem(updateItems)
         setEditInputIndex(null)
         setEditInputValue('')
@@ -54,6 +70,11 @@ const TodoMain2 = () => {
         const updatedItems = [...addItem]
         updatedItems[index].checked = !updatedItems[index].checked
         setAddItem(updatedItems)
+    }
+
+    const handleResetClick = () => {
+        setEditInputIndex(null)
+        setEditInputValue('')
     }
 
     return (
@@ -81,7 +102,7 @@ const TodoMain2 = () => {
                                 <input value={editInputValue} onChange={(e) => handleEditChange(e, index)}/>
                                 <div>
                                     <button onClick={handleSaveClick}>저장하기</button>
-                                    <button onClick={() => handleDelClick(index)}>삭제</button>
+                                    <button onClick={() => handleResetClick(index)}>취소</button>
                                 </div>
                             </div>
                         ) : (
@@ -93,6 +114,7 @@ const TodoMain2 = () => {
                                 <span
                                     className={styles.spanStyle}
                                     style={{textDecoration : item.checked ? 'line-through' : 'none'}}>{item.content}</span>
+                                <span className={styles.spanStyle2}>{item.time}</span>
 
                                 {!item.checked && (
                                     <button onClick={() => handleEditClick(index)}>수정하기</button>
@@ -108,4 +130,4 @@ const TodoMain2 = () => {
     );
 };
 
-export default TodoMain2;
+export default TodoMain4;
