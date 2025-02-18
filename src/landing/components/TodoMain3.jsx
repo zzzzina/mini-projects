@@ -61,7 +61,7 @@ const TodoMain3 = () => {
                         ) : (
                             <div>
                                 <span>{item}</span>
-                                <button onClick={() => handleEditClick(item, index)}>수정하기</button>
+                                <buttons onClick={() => handleEditClick(item, index)}>수정하기</buttons>
                             </div>
                             )
                         }

@@ -31,13 +31,16 @@ const TodoMain4 = () => {
             setInputValue('')
 
         } else if(inputValue !== ''){
-            const newItem = {content: inputValue, checked: false, time: currentTime()}
-            setAddItem([...addItem,newItem])
+            const newItem = {content: inputValue, checked: false, time: currentTime(), edited: false}
+            setAddItem([...addItem, newItem])
             setInputValue('')
         }
     }
     // 수정버튼눌렀다
     const handleEditClick = (index) => {
+        const updatedItems = [...addItem]
+        updatedItems[index].isEditing = true
+        setAddItem(updatedItems)
         setEditInputIndex(index)
         setEditInputValue(addItem[index].content)
     }
@@ -49,10 +52,11 @@ const TodoMain4 = () => {
 
     //저장버튼눌렀다
     const handleSaveClick = () => {
-        const updateItems = [...addItem]
-        updateItems[editInputIndex].content = editInputValue // 수정한 입력값
-        updateItems[editInputIndex].time = currentTime() // 수정한 시간
-        setAddItem(updateItems)
+        const updatedItems = [...addItem]
+        updatedItems[editInputIndex].content = editInputValue // 수정한 입력값
+        updatedItems[editInputIndex].time = currentTime() // 수정한 시간
+        updatedItems[editInputIndex].edited = true // 수정 완료 수정됨 표시
+        setAddItem(updatedItems)
         setEditInputIndex(null)
         setEditInputValue('')
     }
@@ -100,7 +104,7 @@ const TodoMain4 = () => {
                         {editInputIndex === index ? (
                             <div className={styles.editStyle}>
                                 <input value={editInputValue} onChange={(e) => handleEditChange(e, index)}/>
-                                <div>
+                                <div className={styles.btnStyle}>
                                     <button onClick={handleSaveClick}>저장하기</button>
                                     <button onClick={() => handleResetClick(index)}>취소</button>
                                 </div>
@@ -108,18 +112,23 @@ const TodoMain4 = () => {
                         ) : (
                             <div className={styles.editStyle}>
                                 <input type="checkbox"
-                                       style={{width: '15px'}}
+                                       style={{width: '15px', margin: '6px 5px 0 7px'}}
                                        checked={item.checked}
                                        onChange={() => checkBoxChange(index)} />
                                 <span
                                     className={styles.spanStyle}
                                     style={{textDecoration : item.checked ? 'line-through' : 'none'}}>{item.content}</span>
-                                <span className={styles.spanStyle2}>{item.time}</span>
 
-                                {!item.checked && (
-                                    <button onClick={() => handleEditClick(index)}>수정하기</button>
-                                )}
-                                <button onClick={() => handleDelClick(index)}>삭제</button>
+                                <span className={styles.spanStyle2}>{item.time}</span>
+                                {item.edited && <span className={styles.spanStyle3}>수정됨</span>}
+
+                                <div className={styles.btnStyle}>
+                                    {!item.checked ? (
+                                        <button onClick={() => handleEditClick(index)}>수정하기</button>
+                                    ):(
+                                        <button onClick={() => handleDelClick(index)}>삭제</button>
+                                    )}
+                                </div>
                             </div>
                         )
                         }

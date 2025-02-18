@@ -7,7 +7,7 @@ const TodoMain2 = () => {
     const [showInput, setShowInput] = useState(false)
     const [editInputIndex, setEditInputIndex] = useState(null)
     const [editInputValue, setEditInputValue] = useState('') // 수정입력창 입력값
-    const [checkedItem, setCheckedItem] = useState([])
+    const [checkedItems, setCheckedItems] = useState([])
 
     // 초기값에서 어쩌구 값으로 변경
     const handleChangeValue = (e) => {
@@ -18,6 +18,7 @@ const TodoMain2 = () => {
         if(inputValue !== ''){
             console.log(inputValue)
             setAddItem(prevItem => [...prevItem, inputValue])
+            setCheckedItems(prev => [...prev, false])
             setInputValue('')
         }
     }
@@ -44,7 +45,8 @@ const TodoMain2 = () => {
 
     const handleDelClick = (index) => {
         const newItems = addItem.filter((item, i) => i !== index)
-         setAddItem(newItems)
+        const newCheckedItems = checkedItems.filter((item, i) => i !== index)
+        setAddItem(newItems)
     }
 
     const toggleInput = () => {
@@ -52,9 +54,9 @@ const TodoMain2 = () => {
     };
 
     const checkBoxChange = (index) => {
-        const newCheckedItem = [...checkedItem]
-        newCheckedItem[index] = !newCheckedItem[index]
-        setCheckedItem(newCheckedItem)
+        const newCheckedItems = [...checkedItems]
+        newCheckedItems[index] = !newCheckedItems[index]
+        setCheckedItems(newCheckedItems)
     }
 
     return (
@@ -84,30 +86,27 @@ const TodoMain2 = () => {
                                      <button onClick={handleSaveClick}>저장하기</button>
                                      <button onClick={() => handleDelClick(index)}>삭제</button>
                                  </div>
-
                              </div>
                              ) : (
                              <div className={styles.editStyle}>
                                  <input type="checkbox"
                                         style={{width: '15px'}}
-                                        checked={checkedItem[index]}
+                                        checked={checkedItems[index]}
                                         onChange={() => checkBoxChange(index)} />
                                  <span
                                      className={styles.spanStyle}
-                                     style={{textDecoration : checkedItem[index] ? 'line-through' : 'none'}}>{item}</span>
-                                 {!checkedItem[index] && (
+                                     style={{textDecoration : checkedItems[index] ? 'line-through' : 'none'}}>{item}</span>
+                                 {!checkedItems[index] && (
                                      <button onClick={() => handleEditClick(item, index)}>수정하기</button>
                                  )}
                                  <button onClick={() => handleDelClick(index)}>삭제</button>
                              </div>
                              )
                          }
-
                     </div>
                 )}
             </div>
         </div>
-
     );
 };
 

@@ -82,25 +82,34 @@
   height: 39px;
   border-radius: 15px;
   display: flex;
+  position: relative;
 
   input{
     height: 25px;
-    width: 180px;
-    margin: 7px 5px 0 7px;
+    width: 290px;
+    margin: 4px 0 0 8px;
     outline: none;
   }
 }
-.checkBox{
-   width: 15px;
-   margin-left: 10px;
- }
 .spanStyle{
   height: 25px;
-  width: 170px;
+  width: 190px;
   margin-top: 7px;
 }
 .spanStyle2{
   height: 25px;
-  width: 140px;
+  width: 125px;
   margin-top: 7px;
+}
+.spanStyle3{
+  height: 25px;
+  width: 125px;
+  margin: 11px 0 0 6px;
+  font-size: 11px;
+  font-weight: bold;
+}
+.btnStyle{
+  position: absolute;
+  top: 0;
+  right: 0;
 }
