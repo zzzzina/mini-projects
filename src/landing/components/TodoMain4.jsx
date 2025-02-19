@@ -8,6 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import Block from '../../landing/components/Block';
 
 const TodoMain4 = () => {
     const [inputValue, setInputValue] = useState('')
@@ -19,7 +20,7 @@ const TodoMain4 = () => {
     const currentTime = () => {
         const date = new Date()
         const years = date.getFullYear()
-        const months = String(date.getMonth()+1).padStart(2,0)
+        const months = String(date.getMonth() + 1).padStart(2, 0)
         const days = String(date.getDate()).padStart(2, 0)
         const hours = String(date.getHours()).padStart(2, 0)
         const minutes = String(date.getMinutes()).padStart(2, 0)
@@ -34,14 +35,14 @@ const TodoMain4 = () => {
     }
     // 입력된 값을 추가
     const handleAddClick = (e) => {
-        if(editInputIndex !== null){
+        if (editInputIndex !== null) {
             Swal.fire({
                 text: '수정을 완료하세요!',
                 icon: 'warning'
             })
             setInputValue('')
 
-        } else if(inputValue !== ''){
+        } else if (inputValue !== '') {
             const newItem = {content: inputValue, checked: false, time: currentTime(), edited: false}
             setAddItem([...addItem, newItem])
             setInputValue('')
@@ -76,7 +77,8 @@ const TodoMain4 = () => {
         setAddItem(updatedItems)
     }
 
-    const handleCompleteClcik =(index) => {
+    const handleCompleteClcik = (index) => {
+
     }
 
     const toggleInput = () => {
@@ -101,18 +103,24 @@ const TodoMain4 = () => {
                 <p onClick={toggleInput}>새로운 Todo를 만들어요!</p>
 
                 {showInput && (
-                    <div className={styles.addInputStyle}>
-                        <input value={inputValue}
-                               onChange={handleChangeValue}
-                               placeholder='할 일을 입력하세요!'
+                    <div className={styles.addContainer}>
+                        <input
+                            className={styles.addInputStyle}
+                            value={inputValue}
+                            onChange={handleChangeValue}
+                            placeholder='할 일을 입력하세요!'
                         />
-                        <AddCircleOutlinedIcon style={{ color: 'lightGray', fontSize: '25px'}} onClick={handleAddClick} />
+                        <AddCircleOutlinedIcon
+                            className={styles.addIcon}
+                            onClick={handleAddClick}/>
                     </div>
                 )}
             </div>
 
             {addItem.length > 0 && (
-                <section className={styles.block}></section>
+                <section className={styles.blockContainer}>
+                    <Block/>
+                </section>
             )}
 
             <section className={styles.mapItem}>
@@ -122,22 +130,22 @@ const TodoMain4 = () => {
                             <div className={styles.editStyle}>
                                 <input value={editInputValue} onChange={(e) => handleEditChange(e, index)}/>
                                 <div className={styles.btnStyle}>
-                                    <SaveAltIcon style={{ color: 'peachpuff'}}
-                                        onClick={handleSaveClick} />
+                                    <SaveAltIcon style={{color: 'peachpuff'}}
+                                                 onClick={handleSaveClick}/>
                                     <RestartAltIcon
-                                        style={{ color: 'gray', marginLeft: '6px'}}
+                                        style={{color: 'gray', marginLeft: '6px'}}
                                         onClick={() => handleResetClick(index)}/>
-                                 </div>
+                                </div>
                             </div>
                         ) : (
                             <div className={styles.editStyle}>
                                 <input type="checkbox"
                                        style={{width: '15px', margin: '6px 5px 0 7px'}}
                                        checked={item.checked}
-                                       onChange={() => checkBoxChange(index)} />
+                                       onChange={() => checkBoxChange(index)}/>
                                 <span
                                     className={styles.spanStyle}
-                                    style={{textDecoration : item.checked ? 'line-through' : 'none'}}>{item.content}</span>
+                                    style={{textDecoration: item.checked ? 'line-through' : 'none'}}>{item.content}</span>
 
                                 <span className={styles.spanStyle2}>{item.time}</span>
                                 {item.edited && <span className={styles.spanStyle3}>수정됨</span>}
@@ -145,16 +153,16 @@ const TodoMain4 = () => {
                                 <div className={styles.btnStyle}>
                                     {!item.checked ? (
                                         <EditIcon
-                                            style={{ color: 'peachpuff'}}
+                                            style={{color: 'peachpuff'}}
                                             onClick={() => handleEditClick(index)}/>
-                                    ):(
+                                    ) : (
                                         <>
                                             <CheckCircleIcon
-                                                style={{ color: 'peachpuff'}}
-                                                onClick={() => handleCompleteClcik(index)} />
+                                                style={{color: 'peachpuff'}}
+                                                onClick={() => handleCompleteClcik(index)}/>
                                             <BackspaceIcon
-                                                style={{ color: 'lightGray', marginLeft: '6px'}}
-                                                onClick={() => handleDelClick(index)} />
+                                                style={{color: 'lightGray', marginLeft: '6px'}}
+                                                onClick={() => handleDelClick(index)}/>
                                         </>
                                     )}
                                 </div>
