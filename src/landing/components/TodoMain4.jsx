@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
 import styles from "../../styles/landing/Todo.module.scss";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
+import BackspaceIcon from '@mui/icons-material/Backspace';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import EditIcon from '@mui/icons-material/Edit';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 const TodoMain4 = () => {
     const [inputValue, setInputValue] = useState('')
@@ -16,7 +24,7 @@ const TodoMain4 = () => {
         const hours = String(date.getHours()).padStart(2, 0)
         const minutes = String(date.getMinutes()).padStart(2, 0)
 
-        return (`${years}-${months}-${days} ${hours}:${minutes}`)
+        return (`${years}-${months}-${days} ${hours}:${minutes}`) // 입력시간 오류 return으로 해결
     }
 
     // 초기값에서 어쩌구값으로 변경
@@ -27,7 +35,10 @@ const TodoMain4 = () => {
     // 입력된 값을 추가
     const handleAddClick = (e) => {
         if(editInputIndex !== null){
-            alert('수정을 완료하세요.')
+            Swal.fire({
+                text: '수정을 완료하세요!',
+                icon: 'warning'
+            })
             setInputValue('')
 
         } else if(inputValue !== ''){
@@ -39,7 +50,6 @@ const TodoMain4 = () => {
     // 수정버튼눌렀다
     const handleEditClick = (index) => {
         const updatedItems = [...addItem]
-        updatedItems[index].isEditing = true
         setAddItem(updatedItems)
         setEditInputIndex(index)
         setEditInputValue(addItem[index].content)
@@ -64,6 +74,9 @@ const TodoMain4 = () => {
     const handleDelClick = (index) => {
         const updatedItems = addItem.filter((item, i) => i !== index)
         setAddItem(updatedItems)
+    }
+
+    const handleCompleteClcik =(index) => {
     }
 
     const toggleInput = () => {
@@ -93,21 +106,28 @@ const TodoMain4 = () => {
                                onChange={handleChangeValue}
                                placeholder='할 일을 입력하세요!'
                         />
-                        <button onClick={handleAddClick}>추가</button>
+                        <AddCircleOutlinedIcon style={{ color: 'lightGray', fontSize: '25px'}} onClick={handleAddClick} />
                     </div>
                 )}
             </div>
 
-            <div className={styles.mapItem}>
+            {addItem.length > 0 && (
+                <section className={styles.block}></section>
+            )}
+
+            <section className={styles.mapItem}>
                 {addItem.map((item, index) =>
                     <div className={styles.itemStyle} key={index}>
                         {editInputIndex === index ? (
                             <div className={styles.editStyle}>
                                 <input value={editInputValue} onChange={(e) => handleEditChange(e, index)}/>
                                 <div className={styles.btnStyle}>
-                                    <button onClick={handleSaveClick}>저장하기</button>
-                                    <button onClick={() => handleResetClick(index)}>취소</button>
-                                </div>
+                                    <SaveAltIcon style={{ color: 'peachpuff'}}
+                                        onClick={handleSaveClick} />
+                                    <RestartAltIcon
+                                        style={{ color: 'gray', marginLeft: '6px'}}
+                                        onClick={() => handleResetClick(index)}/>
+                                 </div>
                             </div>
                         ) : (
                             <div className={styles.editStyle}>
@@ -124,17 +144,25 @@ const TodoMain4 = () => {
 
                                 <div className={styles.btnStyle}>
                                     {!item.checked ? (
-                                        <button onClick={() => handleEditClick(index)}>수정하기</button>
+                                        <EditIcon
+                                            style={{ color: 'peachpuff'}}
+                                            onClick={() => handleEditClick(index)}/>
                                     ):(
-                                        <button onClick={() => handleDelClick(index)}>삭제</button>
+                                        <>
+                                            <CheckCircleIcon
+                                                style={{ color: 'peachpuff'}}
+                                                onClick={() => handleCompleteClcik(index)} />
+                                            <BackspaceIcon
+                                                style={{ color: 'lightGray', marginLeft: '6px'}}
+                                                onClick={() => handleDelClick(index)} />
+                                        </>
                                     )}
                                 </div>
                             </div>
-                        )
-                        }
+                        )}
                     </div>
                 )}
-            </div>
+            </section>
         </div>
     );
 };

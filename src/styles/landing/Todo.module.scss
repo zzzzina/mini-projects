@@ -5,7 +5,7 @@
   background-color: lightsteelblue;
   color: aliceblue;
   width: 900px;
-  height: auto;
+  height: 655px;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
@@ -26,10 +26,18 @@
     font-weight: bold;
   }
 }
+.block{
+  position: absolute;
+  top: 22%;
+  left: 10px;
+  background-color: aliceblue;
+  width: 45%;
+  height: 500px;
+}
 .mapItem{
   position: absolute;
   margin: 0 auto;
-  width: 55%;
+  width: 53%;
   right: 0;
 }
 .itemStyle{
@@ -44,7 +52,7 @@
 }
 .title{
   display: flex;
-  height: 100px;
+  height: 130px;
   padding: 20px 0 0 15px;
   position: relative;
 
@@ -77,7 +85,7 @@
   }
 }
 .editStyle {
-  width: 95%;
+  width: 98%;
   background-color: aliceblue;
   height: 39px;
   border-radius: 15px;
@@ -98,7 +106,7 @@
 }
 .spanStyle2{
   height: 25px;
-  width: 125px;
+  width: 135px;
   margin-top: 7px;
 }
 .spanStyle3{
@@ -112,4 +120,6 @@
   position: absolute;
   top: 0;
   right: 0;
+  font-size: 22px;
+  margin: 7px 10px 0 7px;
 }
