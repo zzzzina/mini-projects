@@ -1,8 +1,9 @@
+import styles from '../../styles/landing/Todo.module.scss';
+
 const Footer = () =>{
     return (
-        <div>
-            푸터임
-            너무해
+        <div className={styles.footer}>
+            푸우우우우우우우우터어어어어어어어
         </div>
     )
 }

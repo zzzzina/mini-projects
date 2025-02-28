@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import cong from '../../assets/cong.jpg';
 import {Link} from "react-router-dom";
+
+
 
 const Main = () => {
     return (
@@ -11,7 +13,6 @@ const Main = () => {
             </div>
 
             <img style={{width: '600px'}} src={cong}/>
-
         </div>
     )
 }

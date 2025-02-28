@@ -1,5 +1,49 @@
 @import "../../styles/mixins";
 
+//header 시작
+.navBox{
+  width: 100%;
+  height: 80px;
+  @include flex-center;
+
+  ul{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: lightslategrey;
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+  }
+
+  li{
+    list-style: none;
+    width: 150px;
+    //border: 1px solid black;
+    @include flex-center;
+  }
+  li:hover{
+    border-bottom: 2px solid #ccc;
+  }
+
+  a{
+    text-decoration: none;
+    //border: 1px solid blue;
+    color: #ccc;
+    font-weight: bold;
+    font-size: 16px;
+  }
+}
+
+//footer 시잣
+.footer{
+  width: 100%;
+  height: 150px;
+  background-color: gray;
+  position: sticky;
+}
+
 
 .container {
   background-color: lightsteelblue;
@@ -10,23 +54,31 @@
   justify-content: center;
   margin: 0 auto;
   position: relative;
-
-  button{
-    border: none;
-    background-color: blanchedalmond;
-    color: gray;
-    border-radius: 13px;
-    margin: 5px;
-    width: 70px;
-    height: 28px;
-  }
-  button:hover{
-    background-color: navajowhite;
-    color: dimgray;
-    font-weight: bold;
-  }
 }
-.block{
+.title{
+   display: flex;
+   height: 120px;
+   padding: 20px 0 0 15px;
+   position: relative;
+
+   p{
+     width: 180px;
+     height: 20px;
+     font-weight: bold;
+     display: flex;
+     flex-direction: column;
+     margin: 5px auto;
+     top: 0;
+     right: 10px;
+     position: absolute;
+
+   }
+   p:hover{
+     border-bottom: 2px solid dimgray;
+     cursor: pointer;
+   }
+ }
+.blockContainer{
   position: absolute;
   top: 22%;
   left: 10px;
@@ -50,39 +102,25 @@
     color: gray;
   }
 }
-.title{
+.addContainer{
   display: flex;
-  height: 130px;
-  padding: 20px 0 0 15px;
-  position: relative;
-
-  p{
-    width: 180px;
-    height: 20px;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    margin: 5px auto;
-    top: 0;
-    right: 10px;
-    position: absolute;
-
-  }
-    p:hover{
-      border-bottom: 2px solid dimgray;
-      cursor: pointer;
-    }
+  position: absolute;
+  right: 10px;
+  top: 90px;
 }
 .addInputStyle{
-  position: absolute;
-  top: 66px;
-  right: 10px;
-
-  input{
-    width: 250px;
-    height: 25px;
-    outline: none;
-  }
+  width: 250px;
+  height: 25px;
+  outline: none;
+}
+.addIcon{
+  color: lightgray;
+  font-size: 28px;
+  margin: 3px 0 0 4px;
+}
+.addIcon:hover{
+  color: gray;
+  cursor: pointer;
 }
 .editStyle {
   width: 98%;
@@ -94,25 +132,25 @@
 
   input{
     height: 25px;
-    width: 290px;
+    width: 350px;
     margin: 4px 0 0 8px;
     outline: none;
   }
 }
 .spanStyle{
   height: 25px;
-  width: 190px;
+  width: 235px;
   margin-top: 7px;
 }
 .spanStyle2{
   height: 25px;
-  width: 135px;
+  width: 130px;
   margin-top: 7px;
 }
 .spanStyle3{
   height: 25px;
-  width: 125px;
-  margin: 11px 0 0 6px;
+  width: 70px;
+  margin-top: 11px;
   font-size: 11px;
   font-weight: bold;
 }
@@ -122,4 +160,166 @@
   right: 0;
   font-size: 22px;
   margin: 7px 10px 0 7px;
+  cursor: pointer;
+}
+
+// notice
+.notice_container{
+  margin: 0 auto;
+  max-width: 1450px;
+  width: 100%;
+  height: 900px;
+  padding: 28px;
+  //font-family: CookieRun_Black;
+  font-weight: bold ;
+  display: flex;
+  flex-direction: column;
+}
+.notice_title{
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px 28px 30px;
+
+  button{
+    border-radius: 50px;
+    margin: 0 0 4px;
+    padding: 8px 20px;
+    background-color: #3A3A3A;
+    border-color: #73c2fd;
+    border-width: 1px;
+    color: #fff;
+  }
+  a{
+    margin-top: 15px;
+  }
+}
+.table_wrap{
+  max-height: 700px;
+  max-width: 1300px;
+  width: 100%;
+  overflow-y: auto;
+  margin: 0 auto;
+  padding: 0;
+}
+.table_container{
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  padding: 28px;
+  border-collapse: collapse;
+  display: flex;
+  flex-direction: row;
+}
+.bodyRow{
+  cursor: pointer;
+}
+.bodyRow:active{
+  cursor: pointer;
+  background-color: #73c2fd;
+}
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+table .cell1{
+  width: 4%;
+}
+table .cell2{
+  width: 81%;
+}
+table .cell3{
+  width: 15%;
+}
+//.paging{
+//  margin: 50px auto;
+//  display: flex;
+//  list-style: none;
+//  height: 44px;
+//  width: 1200px;
+//  border: 1px solid lightsteelblue;
+//  justify-content: center;
+//  align-items: center;
+//  color: #3A3A3A;
+//}
+.notice_container Pagination{
+  height: 80px;
+  border-bottom: none;
+}
+
+.modal{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 1000;
+}
+.modal.open {
+  display: block;
+}
+.modal_box{
+  background-color: lightsteelblue;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 64px 32px;
+  width: 1000px;
+  height: 536px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.title{
+  outline: none;
+  border: 1px solid white;
+  width: 910px;
+  height: 17px;
+  padding: 8px 12px;
+  margin: 0;
+}
+.content{
+  border: 1px solid aliceblue;
+  width: 916px;
+  height: 580px;
+  padding: 10px;
+  margin: 10px;
+}
+p{
+  padding: 10px;
+  margin: 0 0 16px;
+  width: 100%;
+  border: 1px solid rgb(215,215,215);
+  text-align: center;
+  height: auto;
+  overflow-y: auto;
+  min-height: 300px;
+}
+span{
+  width: 100%;
+  height: 20px;
+  color: #3A3A3A;
+}
+.closeBtn{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 12px;
+  background-color: lightsteelblue;
+  color: white;
+  border: none;
+  borderRadius: 4px;
+  cursor: pointer;
+}
+a{
+  text-decoration: none;
+  color: #3A3A3A;
 }

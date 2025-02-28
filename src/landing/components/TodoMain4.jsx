@@ -9,8 +9,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Block from '../../landing/components/Block';
+import {useDispatch} from "react-redux";
+import {logout} from "../../store/store";
+import {useNavigate} from "react-router-dom";
 
 const TodoMain4 = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const [inputValue, setInputValue] = useState('')
     const [addItem, setAddItem] = useState([])
     const [showInput, setShowInput] = useState(false)
@@ -48,6 +54,7 @@ const TodoMain4 = () => {
             setInputValue('')
         }
     }
+
     // 수정버튼눌렀다
     const handleEditClick = (index) => {
         const updatedItems = [...addItem]
@@ -100,6 +107,7 @@ const TodoMain4 = () => {
         <div className={styles.container}>
             <div className={styles.title}>
                 <h2>Todo! 입니다뇽</h2>
+                <button onClick={() => dispatch(logout(navigate('/main')))}>로그아웃</button>
                 <p onClick={toggleInput}>새로운 Todo를 만들어요!</p>
 
                 {showInput && (
